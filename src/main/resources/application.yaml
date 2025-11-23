@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: ragdemo
+
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY}
+      base-url: https://openrouter.ai/api
+      init:
+        pull-model-strategy: when_missing
+        timeout: 5m
+      chat:
+        model: x-ai/grok-4.1-fast:free
+      model:
+        embedding: qwen/qwen3-embedding-8b
+    vectorstore:
+      pgvector:
+        initialize-schema: true
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/vectordb
+    username: testuser
+    password: testpwd
+
+  docker:
+    compose:
+      lifecyle-management: start_only
+
+server.address: 0.0.0.0
