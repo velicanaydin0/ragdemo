@@ -24,6 +24,14 @@ public class ChatController {
     public String chat(@RequestBody String question) {
         return chatClient.prompt()
                 .user(question)
+                .call()
+                .content();
+    }
+
+    @GetMapping("/rag")
+    public String ragChat(@RequestBody String question) {
+        return chatClient.prompt()
+                .user(question)
                 .advisors(QuestionAnswerAdvisor.builder(vectorStore).build())
                 .call()
                 .content();
